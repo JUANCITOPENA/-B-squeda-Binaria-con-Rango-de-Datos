@@ -37,7 +37,7 @@ La búsqueda binaria es un algoritmo eficiente para encontrar un elemento en un 
 
 ## Imágenes de la Aplicación
 
-![Descripción de la imagen 1](creenshot_48.png)
+![Descripción de la imagen 1](Screenshot_48.png)
 ![Descripción de la imagen 2](Screenshot_49.png)
 ![Descripción de la imagen 3](Screenshot_50.png)
 
