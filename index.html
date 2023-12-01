@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link type="text/css" rel="stylesheet" href="style.css"/>
+  </head>
+  <body>
+    
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Búsqueda Binaria con Números</title>
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #faffcd; /* Fondo amarillo limón claro */
+        }
+
+        #contenedor {
+            border: 2px solid black;
+            padding: 20px;
+            width: 70%;
+            background-color: #fff; /* Fondo blanco */
+        }
+
+        h2 {
+            text-align: center;
+            color: #333; /* Texto oscuro */
+        }
+
+        input {
+            width: calc(80% - 16px); /* Ancho del 80% y teniendo en cuenta el relleno */
+            padding: 8px;
+            margin-bottom: 10px;
+            display: block;
+            margin: 0 auto; /* Centrado horizontal */
+            text-align: center;
+            font-weight: 700;
+            font-size: 20px;
+        }
+
+        button {
+            width: calc(85% - 16px); /* Ancho del 80% y teniendo en cuenta el relleno */
+            padding: 10px;
+            background-color: #4caf50; /* Verde */
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            display: block;
+            margin: 0 auto; /* Centrado horizontal */
+        }
+
+        #resultado {
+            font-weight: bold;
+            text-align: center; /* Centrado horizontal */
+            font-weight: 700;
+            font-size: 20px;
+        }
+
+        .numero-arreglo {
+            display: inline-block;
+            background-color: #ffff66; /* Amarillo */
+            padding: 5px;
+            margin: 2px;
+            padding-bottom: 5px;
+            text-align: center;
+            font-weight: 700;
+            font-size: 20px;
+            padding-top: 5px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+
+        .resaltado {
+            background-color: #4caf50; /* Verde */
+            color: white;
+            border-radius: 4px; /* Ajustado a 4px */
+        }
+
+        p {
+            display: block;
+            margin-block-start: 1em;
+            margin-block-end: 1em;
+            margin-inline-start: 0px;
+            margin-inline-end: 0px;
+            padding-top: 5px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="contenedor">
+        <h2>Búsqueda Binaria con Números</h2>
+
+        <!-- Caja de texto para ingresar el rango de números -->
+        <input type="text" id="rangoInicial" placeholder="Ingrese el primer valor del rango">
+        <br>
+        <input type="text" id="rangoFinal" placeholder="Ingrese el último valor del rango">
+        <br>
+        
+        <!-- Caja de texto para ingresar el número a buscar -->
+        <input type="text" id="numeroBusqueda" placeholder="Ingrese el número a buscar">
+        <br>
+
+        <!-- Botón para generar el nuevo arreglo y realizar la búsqueda -->
+        <button onclick="generarArregloYBuscar()">Generar Arreglo y Buscar</button>
+        <br>
+
+        <div id="resultado"></div>
+    </div>
+
+    <script>
+        // Variables para almacenar el rango y el arreglo generado
+        let rangoInicial, rangoFinal, arregloGenerado;
+
+        // Función de búsqueda binaria
+        function busquedaBinaria(arr, target) {
+            let inicio = 0;
+            let fin = arr.length - 1;
+
+            while (inicio <= fin) {
+                const medio = Math.floor((inicio + fin) / 2);
+
+                if (arr[medio] === target) {
+                    return `Número <span class="resaltado">${target}</span> encontrado en la posición ${medio}.`;
+                } else if (arr[medio] < target) {
+                    inicio = medio + 1;
+                } else {
+                    fin = medio - 1;
+                }
+            }
+
+            return `Número ${target} no encontrado en el arreglo.`;
+        }
+
+        // Función para generar un nuevo arreglo y realizar la búsqueda
+        function generarArregloYBuscar() {
+            // Obtener los valores del rango inicial y final
+            rangoInicial = parseInt(document.getElementById("rangoInicial").value);
+            rangoFinal = parseInt(document.getElementById("rangoFinal").value);
+
+            // Generar un nuevo arreglo ordenado de números dentro del rango
+            arregloGenerado = Array.from({ length: rangoFinal - rangoInicial + 1 }, (_, index) => index + rangoInicial);
+
+            // Obtener el contenedor para mostrar los resultados
+            const contenedor = document.getElementById("contenedor");
+
+            // Crear un elemento para mostrar la lista y resultados
+            const resultadoElemento = document.getElementById("resultado");
+
+            // Resaltar el número buscado en verde
+            resultadoElemento.innerHTML = `<p>Arreglo: ${arregloGenerado.map(numero => `<span class="numero-arreglo${numero === parseInt(document.getElementById("numeroBusqueda").value) ? ' resaltado' : ''}">${numero}</span>`).join(", ")}</p>`;
+
+            // Obtener el número a buscar
+            const numeroBusqueda = parseInt(document.getElementById("numeroBusqueda").value);
+
+            // Realizar la búsqueda en el nuevo arreglo
+            resultadoElemento.innerHTML += `<p>Número a buscar: ${numeroBusqueda}</p>`;
+            resultadoElemento.innerHTML += `<p>${busquedaBinaria([...arregloGenerado], numeroBusqueda)}</p>`;
+        }
+    </script>
+</body>
+
+</html>
+    <script type="module" src="script.js"></script>
+  </body>
+</html>
